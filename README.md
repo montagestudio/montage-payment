@@ -1,3 +1,18 @@
+# montage-payment
+
+## CustomFields
+
+CustomFields:
+- planId
+- productId
+- productQty
+- productQtyUsed
+- 
+## Links
+- https://sandbox.braintreegateway.com/
+- https://articles.braintreepayments.com/control-panel/custom-fields#creating-a-custom-field
+- https://developers.braintreepayments.com/reference/general/testing/node
+
 
 This readme file provides a brief overview of the file and folder structure
 included in the default MontageJS project directory.

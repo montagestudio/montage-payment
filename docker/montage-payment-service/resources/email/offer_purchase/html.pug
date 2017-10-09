@@ -1,0 +1,37 @@
+p
+| We received an order for a purchase. 
+p
+	| Thanks for your business!
+pre
+	| ------------------------------------
+	|
+	| #{app.title} Purchase
+	|
+	| Order Id: #{order.id}
+	|
+	| Product Id: #{order.offerDetails.productId}
+	| Product Qty: #{order.offerDetails.productQty}
+	| Product Qty Used: #{order.offerDetails.productQtyUsed}
+	|
+	| Transaction ID: #{transaction.id}
+	| Status: #{transaction.status}
+	| Charged to: #{transaction.creditCard.cardType} #{transaction.creditCard.maskedNumber}
+	| Total: #{transaction.amount}  #{transaction.currencyIsoCode} *
+	|
+	|
+	| #{order.billingDetails.company}
+	|
+	| #{order.billingDetails.streetAddress}
+	|
+	| #{order.billingDetails.locality}, #{order.billingDetails.postalCode} #{order.billingDetails.region}
+	|
+	| #{order.billingDetails.countryName}
+	| ------------------------------------
+p 
+	| * VAT/GST paid directly by #{order.billingDetails.company}, where applicable
+p
+	| Questions? Please contact #{order.billingDetails.email}
+p 
+| Regards,
+br
+| #{app.title} Billing

@@ -1,0 +1,38 @@
+| We received an order for a subscription. 
+|
+| Thanks for your business!
+|
+| ------------------------------------
+|
+| #{app.title} Subscription
+|
+| Order Id: #{order.id}
+|
+| Plan Id: #{subscription.planId}
+| Status: #{subscription.status}
+|
+| Total: #{order.offerDetails.amount.value} #{order.offerDetails.amount.currency} *
+|
+| Billing day of month: #{subscription.billingDayOfMonth}
+| First billing date: #{subscription.firstBillingDate}
+| Next billing date: #{subscription.nextBillingDate}
+| Paid through date: #{subscription.paidThroughDate || subscription.nextBillingDate}
+|
+|
+| #{order.billingDetails.company}
+|
+| #{order.billingDetails.streetAddress}
+|
+| #{order.billingDetails.locality}, #{order.billingDetails.postalCode} #{order.billingDetails.region}
+|
+| #{order.billingDetails.countryName}
+| ------------------------------------
+
+| * VAT/GST paid directly by #{order.billingDetails.company}, where applicable
+
+|
+| Questions? Please contact #{order.billingDetails.email}
+|
+| Regards,
+|
+| #{app.title} Billing
