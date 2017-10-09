@@ -1,10 +1,7 @@
 /* global module */
 module.exports = {
 
-    //
     // Payment
-    //
-
     payment: {
         enable: true,
         billing: {
@@ -19,10 +16,7 @@ module.exports = {
         }
     },
 
-    //
-    // Externals Shared APIs
-    //
-
+    // MailService
     email: {
         enable: true,
         test: false,
@@ -45,13 +39,16 @@ module.exports = {
         }
     },
 
+    //
+    // Braintree
+    // 
 
-    // https://developer.paypal.com/
     braintree: {
         enable: true,
-        merchantId: 'swvh5f24s3x7md9f',
-        publicKey: '8wctc92ysj8w3tgz',
-        privateKey: '975c8ae94db9437953c66c1e990f6540',
+        // harold.thetiot@kaazing.com
+        merchantId: '2vcbbfdttx7cyjxt',
+        publicKey: 't4kn2m7nywkycmrs',
+        privateKey: 'dcfd5303cb2459c33f521136796d67e7',
         payment: {
             failOnDuplicatePaymentMethod: false,
             verifyCard: true,

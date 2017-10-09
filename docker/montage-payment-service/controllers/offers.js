@@ -9,7 +9,7 @@ exports.getOffers = function (req, res, next) {
     var config = req.app.get('config');
     offersService.offer.getAll().then(function (offers) {
       res.status(200);
-      res.json(offers).map(offersService.offer.getInfo);
+      res.json(offers.map(offersService.offer.getInfo));
     });
 };
 

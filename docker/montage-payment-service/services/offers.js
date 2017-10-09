@@ -11,6 +11,8 @@ var Offers = require('./../models/offer').Offers;
 var Plans = require('./../models/plan').Plans;
 var Order = require('./../models/order').Order;
 
+var MailService = require('./mail');
+
 function filterByProperty(orderId, orders, prop) {
   return orders.filter(function (order) {
     return order[prop] === orderId;
@@ -1328,35 +1330,9 @@ function parseNotification(webhookNotification, gateway, useGateway, config) {
 // Notifications
 //
 
-var Valid = require('node-valid');
-function isValidEmail(str) {
-    return new Valid().validate(str).required().isEmail().isValid();
-}
 
-function formatEmailName(email, name) {
-
-    if (exports.isValidEmail(email) === false) {
-        throw Error('Invalid formatEmailName email: ' + email);
-    }
-
-    if (email === name) {
-        name = null;
-    }
-
-    return name ? name + ' <' + email + '>' : email;
-}
-
-function sendEmailTemplate(templateName, templateData, emailObj, config, emailConfig) {
-  // TODO
-  /*
-  var Valid = require('node-valid');
-  var nodemailer = require("nodemailer");
-  var smtpTransport = require('nodemailer-smtp-transport');
-  var stubTransport = require('nodemailer-stub-transport');
-  var sendmailTransport = require('nodemailer-sendmail-transport');
-  var EmailTemplate = require('email-templates').EmailTemplate;
-  */
-}
+var formatEmailName = MailService.formatEmailName,
+    sendEmailTemplate = MailService.sendEmailTemplate;
 
 function sendTransactionReceiptEmail(order, customer, transaction, config) {
   // Welcome email
