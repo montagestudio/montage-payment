@@ -1,4 +1,6 @@
 
+// TODO schema
+
 exports.Plans = {
   PREMIUM: {
     // Features info

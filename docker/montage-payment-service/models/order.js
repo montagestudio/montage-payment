@@ -6,17 +6,22 @@ var jsonschema = require('jsonschema');
 var jsonSchemaValidate = jsonschema.validate;
 var Schema = mongoose.Schema;
 
+// TODO complete schema
 var offerDetailsSchema =  {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "id": "/offerDetails",
     "type": "object"
 };
 
+// TODO complete schema
 var customerDetailsSchema =  {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "id": "/customerDetails",
     "type": "object"
 };
+
+
+// TODO transaction && subscription schema
 
 var transactionValidStatus = ['submitted_for_settlement', 'settling', 'settlement_pending', 'settlement_confirmed', 'settled', 'authorized', 'authorizing'];
 var transactionInvalidStatus = ['voided', 'settlement_declined', 'processor_declined', 'failed', 'gateway_rejected', 'authorization_expired'];
@@ -26,7 +31,6 @@ var subscriptionInvalidStatus = ['canceled', 'past_due', 'expired'];
 
 var orderValidStatus = transactionValidStatus.concat(subscriptionValidStatus);
 var orderInvalidStatus = transactionInvalidStatus.concat(subscriptionInvalidStatus);
-
 
 var OrderSchema = new Schema({
             

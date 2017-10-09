@@ -127,6 +127,7 @@ exports.callbackTest = function (req, res, next) {
       useGateway = req.query.useGateway === '1';
 
   return offersService.gateway.get(config).then(function (gateway) {
+    // TODO  gateway.sampleNotification
     var braintree = require('braintree');
     var sampleNotification = gateway.webhookTesting.sampleNotification(
       braintree.WebhookNotification.Kind.Check

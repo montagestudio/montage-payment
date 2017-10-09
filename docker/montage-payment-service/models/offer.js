@@ -1,4 +1,6 @@
 
+// TODO schema
+
 exports.Offers = [
   {
     enable: true,
