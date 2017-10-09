@@ -1,5 +1,27 @@
 # montage-payment
 
+[![Build Status](https://travis-ci.com/kaazing/montage-payment.svg?token=DkxazY7pbviHZyy38ZZb&branch=master)](https://travis-ci.com/kaazing/montage-payment)
+
+This is a sample app that use Montage and Braintree to fetch provide a payment service.
+
+# Quick start
+
+1. Install 
+```
+git clone git@github.com:montagestudio/montage-payment.git
+cd montage-payment
+npm install
+ ```
+
+2. Start
+```
+npm start
+```
+
+3. Test
+Then Open you browser to "https://localhost:8080".
+
+
 ## CustomFields
 
 CustomFields:
