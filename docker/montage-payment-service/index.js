@@ -92,7 +92,7 @@ app.use(errors.notfound);
 
 var APP_PORT = app.get('APP_PORT'),  
     APP_URL = app.get('APP_URL'),  
-    APP_SSL = app.get('APP_SSL')
+    APP_SSL = app.get('APP_SSL'),
     CERT_PATH = app.get('ROOT_PATH') + '/certs/';
 
 if (APP_PORT === 443) {

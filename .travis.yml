@@ -35,6 +35,7 @@ before_script:
   - export DOCKER_CLIENT_TIMEOUT=120
   - docker-compose build
 script:
+  - npm run lint
   - docker-compose up -d
   - sleep 25
   - npm test
