@@ -50,24 +50,27 @@ var offers = require('./controllers/offers');
 app.get("/api/offers", offers.getOffers);
 app.get("/api/offers/offer/:offerId", offers.getOffer);
 
-app.get("/api/customer", offers.getCustomer);
-app.get("/api/customer/:customerId", offers.getCustomerDetails);
-app.get("/api/customer/:customerId/orders", offers.getCustomerOrders);
-app.get("/api/customer/:customerId/orders/order/:orderId", offers.getCustomerOrder);
-app.get("/api/customer/:customerId/orders/order/:orderId/invoice/:invoiceFormat", offers.getCustomerOrder);
-app.delete("/api/customer/:customerId/orders/order/:orderId", offers.cancelCustomerOrder);
-app.get("/api/customer/:customerId/transactions", offers.getCustomerTransactions);
-app.get("/api/customer/:customerId/subscriptions", offers.getCustomerSubscriptions);
-app.get("/api/customer/:customerId/offers", offers.getCustomerOffers);
-app.get("/api/customer/:customerId/offers/offer/:offerId", offers.getCustomerOffer);
-app.get("/api/customer/:customerId/plans", offers.getCustomerPlans);
+
+var customer = require('./controllers/customer');
+app.get("/api/customer", customer.getCustomer);
+app.get("/api/customer/:customerId", customer.getCustomerDetails);
+app.get("/api/customer/:customerId/orders", customer.getCustomerOrders);
+app.get("/api/customer/:customerId/orders/order/:orderId", customer.getCustomerOrder);
+app.get("/api/customer/:customerId/orders/order/:orderId/invoice/:invoiceFormat", customer.getCustomerOrder);
+app.delete("/api/customer/:customerId/orders/order/:orderId", customer.cancelCustomerOrder);
+app.get("/api/customer/:customerId/transactions", customer.getCustomerTransactions);
+app.get("/api/customer/:customerId/subscriptions", customer.getCustomerSubscriptions);
+app.get("/api/customer/:customerId/offers", customer.getCustomerOffers);
+app.get("/api/customer/:customerId/offers/offer/:offerId", customer.getCustomerOffer);
+app.get("/api/customer/:customerId/plans", customer.getCustomerPlans);
 // TODO param
 //app.param('customerId', offers.customerIdParam);
 
-app.post("/api/payment", offers.checkoutPaymentOffer);
-app.put("/api/payment/:orderId", offers.updatePaymentOffer);
-app.post("/api/payment/callback", offers.callback);
-app.get("/api/payment/callbackTest", offers.callbackTest);
+var payment = require('./controllers/payment');
+app.post("/api/payment", payment.checkoutPaymentOffer);
+app.put("/api/payment/:orderId", payment.updatePaymentOffer);
+app.post("/api/payment/callback", payment.callback);
+app.get("/api/payment/callbackTest", payment.callbackTest);
 
 //
 // Errors Handling
