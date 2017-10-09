@@ -1,7 +1,6 @@
 /* global exports, require */
 var offersService = require('./../services/offers');
 
-
 exports.getCustomer = function(req, res, next) {
 
     var config = req.app.get('config');
