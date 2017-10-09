@@ -1013,7 +1013,7 @@ function getCustomerSubscriptions(customerId, gateway, config) {
   // TODO use local first
   try {
     gateway.subscription.search(function (search) {
-      search.merchantAccountId().is(config.braintree.merchantAccountId);
+      search.merchantAccountId().is(config.braintree.merchantId);
       //search.status().is(braintree.Subscription.Status.Active);
       //search.status().is(braintree.Subscription.Status.Canceled);
     }, function (err, searchResponse) {
