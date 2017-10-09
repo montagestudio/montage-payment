@@ -66,6 +66,7 @@ See: https://articles.braintreepayments.com/control-panel/custom-fields#creating
 - GET "/api/customer/:customerId" - get Customer Details
 - GET "/api/customer/:customerId/orders" - get Customer Orders
 - GET "/api/customer/:customerId/orders/order/:orderId" - get Customer Order
+- GET "/api/customer/:customerId/orders/order/:orderId/invoice/(pdf|html|text|email)" - get Customer Order Invoice
 - DELETE "/api/customer/:customerId/orders/order/:orderId" - cancel Customer Order
 - GET "/api/customer/:customerId/transactions" - get Customer Transactions
 - GET "/api/customer/:customerId/subscriptions" - get Customer Subscriptions

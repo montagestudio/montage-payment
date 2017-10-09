@@ -1524,7 +1524,7 @@ exports.getCustomerOrder = function (req, res, next) {
       customerId = req.params.customerId,
       orderId = req.params.orderId,
       showInvoice = req.query.showInvoice === '1',
-      invoiceFormat = req.query.invoiceFormat,
+      invoiceFormat = req.params.invoiceFormat || req.query.invoiceFormat,
       downloadInvoice = req.query.downloadInvoice === '1',
       sendEmail = req.query.sendEmail === '1',
       useGateway = req.query.useGateway === '1';

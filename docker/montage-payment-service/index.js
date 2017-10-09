@@ -56,6 +56,7 @@ app.get("/api/customer", offers.getCustomer);
 app.get("/api/customer/:customerId", offers.getCustomerDetails);
 app.get("/api/customer/:customerId/orders", offers.getCustomerOrders);
 app.get("/api/customer/:customerId/orders/order/:orderId", offers.getCustomerOrder);
+app.get("/api/customer/:customerId/orders/order/:orderId/invoice/:invoiceFormat", offers.getCustomerOrder);
 app.delete("/api/customer/:customerId/orders/order/:orderId", offers.cancelCustomerOrder);
 app.get("/api/customer/:customerId/transactions", offers.getCustomerTransactions);
 app.get("/api/customer/:customerId/subscriptions", offers.getCustomerSubscriptions);
