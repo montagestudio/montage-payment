@@ -1,5 +1,4 @@
 /* global exports, require */
-'use strict';
 
 // https://developers.braintreepayments.com/reference/general/testing/node
 // https://developers.braintreepayments.com/start/hello-server/node
@@ -1208,9 +1207,10 @@ function checkoutPaymentOrder(order, paymentMethodNonce, gateway, config, riskDa
 //
 
 
+var Valid = require('node-valid');
 function isValidEmail(str) {
     return new Valid().validate(str).required().isEmail().isValid();
-};
+}
 
 function formatEmailName(email, name) {
 
@@ -1223,7 +1223,7 @@ function formatEmailName(email, name) {
     }
 
     return name ? name + ' <' + email + '>' : email;
-};
+}
 
 function sendEmailTemplate(templateName, templateData, emailObj, config, emailConfig) {
   // TODO

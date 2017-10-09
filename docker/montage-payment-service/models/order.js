@@ -1,5 +1,4 @@
 /*global require, exports */
-'use strict';
 
 var mongoose = require('mongoose');
 var jsonschema = require('jsonschema');

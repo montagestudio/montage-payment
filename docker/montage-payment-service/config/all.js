@@ -1,4 +1,4 @@
-/* global module, __dirname, require, process */
+/* global module */
 module.exports = {
 
     //

@@ -1,8 +1,7 @@
-
-var http = require("http");             
+/* globals process, __dirname */
+    
 var https = require('https');
 var express = require('express');
-var path = require('path');
 var fs = require('fs');
 
 /*
@@ -29,9 +28,8 @@ app.set('APP_URL', process.env.APP_URL || (app.get('APP_SSL') ? 'https' : 'http'
 
 app.set('BRAINTREE_MARCHANT_ID', process.env.BRAINTREE_MARCHANT_ID || "2vcbbfdttx7cyjxt");
 
-var config = require('./config/all');
-// TODO extend with env
-app.set('config');
+// Load json config
+app.set('config', require('./config/all'));
 
 //
 // Serve statics

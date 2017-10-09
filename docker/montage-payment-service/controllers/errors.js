@@ -1,5 +1,4 @@
 /* global exports, require */
-'use strict';
                                         
 function getReqRemoteAddr(req) {
     return req.headers['x-real-ip'] || 
@@ -68,12 +67,12 @@ exports.errors = function(err, req, res, next) {
     // Assume "not found" in the error msgs is a 404. this is somewhat
     // silly, but valid, you can do whatever you like, set properties,
     // use instanceof etc.
-    if (err.message && ~err.message.indexOf('not found')) {
+    if (err.message && err.message.indexOf('not found') !== -1) {
         
         exports.notfound(req, res, next);
 
     // Treat invalid csrf as 400
-    } else if (err.message && ~err.message.indexOf('invalid csrf token')) {
+    } else if (err.message && err.message.indexOf('invalid csrf token') !== -1) {
         
         res.status(400)
             .json({
