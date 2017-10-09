@@ -62,6 +62,13 @@ app.get("/api/customer/:customerId/subscriptions", offers.getCustomerSubscriptio
 app.get("/api/customer/:customerId/offers", offers.getCustomerOffers);
 app.get("/api/customer/:customerId/offers/offer/:offerId", offers.getCustomerOffer);
 app.get("/api/customer/:customerId/plans", offers.getCustomerPlans);
+// TODO param
+//app.param('customerId', offers.customerIdParam);
+
+app.post("/api/payment", offers.checkoutPaymentOffer);
+app.put("/api/payment/:orderId", offers.updatePaymentOffer);
+app.post("/api/payment/callback", offers.callback);
+app.get("/api/payment/callbackTest", offers.callbackTest);
 
 //
 // Errors Handling

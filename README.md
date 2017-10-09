@@ -4,14 +4,14 @@
 
 This is a sample app that use Montage and Braintree to fetch provide a payment service.
 
-# Quick start
+## Quick start
 
 1. Install 
 ```
 git clone git@github.com:montagestudio/montage-payment.git
 cd montage-payment
 npm install
- ```
+```
 
 2. Start
 ```
@@ -21,11 +21,11 @@ npm start
 3. Test
 Then Open you browser to "https://localhost:8080".
 
-# BrainTree config
+## BrainTree config
 
-## New config
+### New config
 
-### Create accounts
+#### Create accounts
 
 1. Create a Paypal account (https://www.paypal.com/signup/create)
 2. Create BrainTree account (https://www.braintreepayments.com/sandbox)
@@ -34,7 +34,7 @@ Then Open you browser to "https://localhost:8080".
 5. Look for Sandbox Keys & Configuration" and save following value for later: "Merchant ID", "Public Key, and "Private Key".
 6. Use BRAINTREE_MARCHANT_ID to start montage-payment-service.
 
-### Setup CustomFields
+#### Setup CustomFields
 
 You will need to configure following CustomFields:
 - plan_id: planId
@@ -49,16 +49,35 @@ See: https://articles.braintreepayments.com/control-panel/custom-fields#creating
 - https://articles.braintreepayments.com/control-panel/custom-fields#creating-a-custom-field
 - https://developers.braintreepayments.com/reference/general/testing/node
 
+# Documentation
 
-This readme file provides a brief overview of the file and folder structure
-included in the default MontageJS project directory.
+## API
 
->IMPORTANT: Be sure to replace the contents of this readme file with information
-about the final application before deploying the application or passing it on to
-a client.
+(Work in progress)
 
-Project Directory
-============
+### Offers
+GET "/api/offers" - getOffers
+GET "/api/offers/offer/:offerId" - getOffer
+
+### Customer
+GET "/api/customer" - get Customer
+GET "/api/customer/:customerId" - get Customer Details
+GET "/api/customer/:customerId/orders" - get Customer Orders
+GET "/api/customer/:customerId/orders/order/:orderId" - get Customer Order
+DELETE "/api/customer/:customerId/orders/order/:orderId" - cancel Customer Order
+GET "/api/customer/:customerId/transactions" - get Customer Transactions
+GET "/api/customer/:customerId/subscriptions" - get Customer Subscriptions
+GET "/api/customer/:customerId/offers" - get Customer Offers
+GET "/api/customer/:customerId/offers/offer/:offerId" - get Customer Offer
+GET "/api/customer/:customerId/plans" - get Customer Plans
+
+### Payment
+POST "/api/payment" - checkout Payment Offer
+PUT "/api/payment/:orderId" - update Payment Offer
+POST "/api/payment/callback" - payment callback 
+GET "/api/payment/callbackTest" - payment callbackTest
+
+# Project Directory
 
 The default project directory includes the following files and folders:
 
@@ -98,8 +117,7 @@ depending on the project you may want to add the following folders:
 * scripts/  -  For JS libraries that do not support the CommonJS exports object
            and, therefore, have to be loaded using a `<script>` tag.
 
-Unit Testing
-=========
+## Unit Testing
 
 MontageJS uses some pure unit tests that are straightforward [Jasmine specs][1].
 
@@ -119,34 +137,4 @@ the component in a real environment.
 
 We also test some components by [mocking their dependencies][6].
 
-Documentation
-============
-
-Here are some links you may find helpful:
-
-* [API Reference][7]
-* [Documentation][8]
-* [FAQ][9]
-
-Contact
-======
-
-* Got questions? Join us on [irc.freenode.net#montage][10].
-* Got feedback or want to report a bug? Let us know by creating a new [Github issue][11].
-* Want to contribute? [Pull-requests][12] are more than welcome.
-
-[1]: https://github.com/montagejs/montage/blob/master/test/core/super-spec.js        "Jasmine specs"
-[2]: https://github.com/montagejs/montage-testing        "montage-testing"
-[3]: https://github.com/montagejs/digit        "digit"
-[4]: https://github.com/montagejs/digit/blob/master/run-tests.html        "run-tests"
-[5]: https://github.com/montagejs/digit/tree/master/test        "test/all.js"
-[6]: https://github.com/montagejs/montage/blob/master/test/base/abstract-button-spec.js        "mocking their dependencies"
-[7]: http://montagejs.org/api/        "API Reference"
-[8]: http://montagejs.org/docs/        "Documentation"
-[9]: http://montagejs.org/docs/faq.html        "FAQ"
-[10]: http://webchat.freenode.net/?channels=montage        "irc.freenode.net#montage"
-[11]: https://github.com/montagejs/montage/issues        "Github issue"
-[12]: https://github.com/montagejs/montage/pulls        "Pull-requests"
-
-Last edited: November 14, 2013
 
