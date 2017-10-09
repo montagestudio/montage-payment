@@ -1,6 +1,7 @@
 /* global exports, require */
 var offersService = require('./../services/offers');
 
+
 exports.getCustomer = function(req, res, next) {
 
     var config = req.app.get('config');
@@ -155,24 +156,15 @@ exports.getCustomerOffers = function(req, res, next) {
         useGateway = req.query.useGateway === '1';
 
     offersService.gateway.get(config).then(function(gateway) {
-        // TODO customer.getOffers
-        return offersService.customer.getOrders(customerId, gateway, useGateway, config).then(function(orders) {
-            return orders.map(function(order) {
-                var offerInfo = {
-                    orderId: order.orderId,
-                    created: order.created,
-                    updated: order.updated,
-                    status: order.status
-                };
-
-                Object.assign(offerInfo, offersService.offer.getInfo(order.offerDetails));
-
-                return offerInfo;
+        return offersService.customer.getFromRequest(req, gateway).then(function(customer) {
+            return offersService.customer.getOffers(customerId, gateway, useGateway, config).then(function(result) {
+                res.status(useGateway ? 200 : 203);
+                res.json(result.map(offersService.order.getOfferInfo));
             });
+        }, function(err) {
+            res.status(401);
+            next(err);
         });
-    }).then(function(result) {
-        res.status(useGateway ? 200 : 203);
-        res.json(result);
     }).catch(function(err) {
         res.status(502);
         next(err);
@@ -187,39 +179,16 @@ exports.getCustomerOffer = function(req, res, next) {
         useGateway = req.query.useGateway === '1';
 
     offersService.gateway.get(config).then(function(gateway) {
-        return offersService.offer.get(offerId).then(function(offer) {
-            return offersService.customer.getFromRequest(req, gateway).then(function(customer) {
-
-                // TODO customer.getOffer
-                return offersService.customer.getOrders(customer.id, gateway, useGateway, config).then(function(orders) {
-                    var offerInfos = orders.filter(function(order) {
-                        return offer.planId ? order.offerDetails.planId === offer.planId :
-                            order.offerDetails.productId === offer.productId;
-                    }).map(function(order) {
-                        var offerInfo = {
-                            orderId: order.orderId,
-                            created: order.created,
-                            updated: order.updated,
-                            status: order.status,
-                            subscriptions: order.subscriptions.map(offersService.subscription.getInfo)
-                        };
-
-                        Object.assign(offerInfo, offersService.offer.getInfo(order.offerDetails));
-
-                        return offerInfo;
-                    });
-
-                    if (offerInfos) {
-                        res.status(useGateway ? 200 : 203);
-                        res.json(offerInfos);
-                    } else {
-                        res.status(404);
-                        next();
-                    }
-                });
+        return offersService.customer.getFromRequest(req, gateway).then(function(customer) {
+            return offersService.customer.getOffer(customer.id, offerId, gateway, useGateway, config).then(function(result) {
+                res.status(useGateway ? 200 : 203);
+                res.json(result.map(offersService.order.getOfferInfo));
+            }, function (err) {
+                res.status(404);
+                next(err);
             });
         }, function(err) {
-            res.status(404);
+            res.status(401);
             next(err);
         });
     }).catch(function(err) {
@@ -236,31 +205,13 @@ exports.getCustomerPlans = function(req, res, next) {
 
     offersService.gateway.get(config).then(function(gateway) {
         return offersService.customer.getFromRequest(req, gateway).then(function(customer) {
-            // customer.getPlans
-            return offersService.customer.getOrders(customer.id, gateway, useGateway, config).then(function(orders) {
-
-                var planInfos = orders.filter(function(order) {
-                    return !!order.offerDetails.planId;
-                }).map(function(order) {
-                    // customer.getPlanInfo
-                    var planInfo = {
-                        orderId: order.orderId,
-                        created: order.created,
-                        updated: order.updated,
-                        status: order.status
-                    };
-                    Object.assign(planInfo, offersService.offer.getInfo(order.offerDetails));
-                    return planInfo;
-                });
-
-                if (planInfos) {
-                    res.status(203);
-                    res.json(planInfos);
-                } else {
-                    res.status(404);
-                    next();
-                }
+            return offersService.customer.getPlans(customerId, gateway, useGateway, config).then(function(result) {
+                res.status(useGateway ? 200 : 203);
+                res.json(result.map(offersService.order.getOfferInfo));
             });
+        }, function(err) {
+            res.status(401);
+            next(err);
         });
     }).catch(function(err) {
         res.status(502);
@@ -275,11 +226,14 @@ exports.getCustomerTransactions = function(req, res, next) {
 
     offersService.gateway.get(config).then(function(gateway) {
         return offersService.customer.getFromRequest(req, gateway).then(function(customer) {
-            return offersService.customer.getTransactions(customer.id, gateway, config);
+            return offersService.customer.getTransactions(customer.id, gateway, config).then(function(result) {
+                res.status(200);
+                res.json(result.map(offersService.transaction.getInfo));
+            });
+        }, function(err) {
+            res.status(401);
+            next(err);
         });
-    }).then(function(result) {
-        res.status(201);
-        res.json(result.map(offersService.transaction.getInfo));
     }).catch(function(err) {
         res.status(502);
         next(err);
@@ -293,11 +247,14 @@ exports.getCustomerSubscriptions = function(req, res, next) {
 
     offersService.gateway.get(config).then(function(gateway) {
         return offersService.customer.getFromRequest(req, gateway).then(function(customer) {
-            return offersService.customer.getSubscriptions(customer.id, gateway, config);
+            return offersService.customer.getSubscriptions(customer.id, gateway, config).then(function(result) {
+                res.status(200);
+                res.json(result.map(offersService.subscription.getInfo));
+            });
+        }, function(err) {
+            res.status(401);
+            next(err);
         });
-    }).then(function(result) {
-        res.status(201);
-        res.json(result.map(offersService.subscription.getInfo));
     }).catch(function(err) {
         res.status(502);
         next(err);
