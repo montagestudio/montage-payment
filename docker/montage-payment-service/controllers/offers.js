@@ -8,36 +8,9 @@
 var braintree = require('braintree');
 var q = require('q');
 
-var Order = require('./../models/order');
-
-function isValidEmail(str) {
-    return new Valid().validate(str).required().isEmail().isValid();
-};
-
-function formatEmailName(email, name) {
-
-    if (exports.isValidEmail(email) === false) {
-        throw Error('Invalid formatEmailName email: ' + email);
-    }
-
-    if (email === name) {
-        name = null;
-    }
-
-    return name ? name + ' <' + email + '>' : email;
-};
-
-function sendEmailTemplate(templateName, templateData, emailObj, config, emailConfig) {
-  // TODO
-  /*
-  var Valid = require('node-valid');
-  var nodemailer = require("nodemailer");
-  var smtpTransport = require('nodemailer-smtp-transport');
-  var stubTransport = require('nodemailer-stub-transport');
-  var sendmailTransport = require('nodemailer-sendmail-transport');
-  var EmailTemplate = require('email-templates').EmailTemplate;
-  */
-}
+var Offers = require('./../models/offers').Offers;
+var Plans = require('./../models/plans').Plans;
+var Order = require('./../models/order').Order;
 
 function filterByProperty(orderId, orders, prop) {
   return orders.filter(function (order) {
@@ -48,117 +21,6 @@ function filterByProperty(orderId, orders, prop) {
 // Plans & Offers
 //
 
-var plans = {
-  PREMIUM: {
-    // Features info
-    user: {
-      enableScheduling: true
-    },
-    room: {
-      enableBroacasting: true,
-      enableRecording: true
-    }
-  },
-  TEAM_20K: {
-
-  },
-  BUSINESS_20K: {
-
-  }
-};
-
-var offers = [
-  {
-    enable: true,
-    id: 'pro',
-    name: "Pro",
-    description: "Premium for individual profesional user.",
-    features: [
-      'Perfect for Dev and Project Manager',
-    ],
-    // Plan
-    planId: 'PREMIUM',
-    planDuration: 1,
-    planPeriod: 'month',
-    // Trail info
-    trialPeriod: true,
-    trialDuration: 14,
-    trialDurationUnit: 'day',
-    // Price
-    amount: {
-      currency: 'USD',
-      value: '9.90'
-    }
-  },
-  {
-    enable: true,
-    id: 'saas',
-    name: "Team",
-    description: "Premium for Team. Mutualized SAAS Server.",
-    features: [
-      'Multi-user Functionality',
-      'Customize Branding',
-      'Perfect for Agencies',
-    ],
-    // Order info
-    planId: 'TEAM',
-    planDuration: 1,
-    planPeriod: 'month',
-    // Trail info
-    trialPeriod: true,
-    trialDuration: 14,
-    trialDurationUnit: 'day',
-    // Price
-    amount: {
-      currency: 'USD',
-      value: '399.00'
-    }
-  },
-  {
-    enable: true,
-    id: 'business',
-    name: "Business",
-    description: "Premium for Team. Dedicated SAAS Server.",
-    features: [
-      'Everything Included in Team Offer',
-      'Dedicated Virtual Private Cloud (VPC)',
-      'Perfect for Corporation',
-    ],
-    // Order info
-    planId: 'BUSINESS',
-    planDuration: 1,
-    planPeriod: 'month',
-    // Trail info
-    trialPeriod: true,
-    trialDuration: 14,
-    trialDurationUnit: 'day',
-    // Price
-    amount: {
-      currency: 'USD',
-      value: '799.00'
-    }
-  },
-  {
-    enable: true,
-    id: 'support',
-    name: "Support Hour",
-    description: "One hour of prepaid dedicated support.",
-    features: [
-      'Support response in 1 hour 24/24',
-      'Assistance for indivial or team',
-      'Ideal for outsourcing Corporate support',
-    ],
-    // Product
-    productId: "SUPPORT_HOUR",
-    productQty: 1,
-    productQtyUsed: 0,
-    // Price
-    amount: {
-      currency: 'USD',
-      value: '99.00'
-    }
-  }
-];
 
 //
 // Offer Internal API
@@ -167,7 +29,7 @@ var offers = [
 function getOffer(offerId) {
   var deferred = q.defer();
 
-  var offer = offers.filter(function (offer) {
+  var offer = Offers.filter(function (offer) {
     return offer.enable && offer.id === offerId;
   })[0];
 
@@ -1345,6 +1207,36 @@ function checkoutPaymentOrder(order, paymentMethodNonce, gateway, config, riskDa
 // Notifications
 //
 
+
+function isValidEmail(str) {
+    return new Valid().validate(str).required().isEmail().isValid();
+};
+
+function formatEmailName(email, name) {
+
+    if (exports.isValidEmail(email) === false) {
+        throw Error('Invalid formatEmailName email: ' + email);
+    }
+
+    if (email === name) {
+        name = null;
+    }
+
+    return name ? name + ' <' + email + '>' : email;
+};
+
+function sendEmailTemplate(templateName, templateData, emailObj, config, emailConfig) {
+  // TODO
+  /*
+  var Valid = require('node-valid');
+  var nodemailer = require("nodemailer");
+  var smtpTransport = require('nodemailer-smtp-transport');
+  var stubTransport = require('nodemailer-stub-transport');
+  var sendmailTransport = require('nodemailer-sendmail-transport');
+  var EmailTemplate = require('email-templates').EmailTemplate;
+  */
+}
+
 function sendTransactionReceiptEmail(order, customer, transaction, config) {
   // Welcome email
     var emailConfig = config.email,
@@ -1437,7 +1329,7 @@ function sendOrderEmail(order, customer, config) {
 exports.getOffers = function (req, res, next) {
     var config = req.app.get('config');
   res.status(200);
-  res.json(offers.filter(function (offer) {
+  res.json(Offers.filter(function (offer) {
     return offer.enable;
   }).map(getOfferInfo));
 };

@@ -226,4 +226,4 @@ OrderSchema.pre('save', function (next) {
  */
 mongoose.model('Order', OrderSchema);
 
-exports.OrderSchema = OrderSchema;
+exports.Order = mongoose.model('Order');

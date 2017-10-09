@@ -1,6 +1,6 @@
 # montage-payment
 
-[![Build Status](https://travis-ci.com/kaazing/montage-payment.svg?token=DkxazY7pbviHZyy38ZZb&branch=master)](https://travis-ci.com/kaazing/montage-payment)
+[![Build Status](https://travis-ci.com/montagestudio/montage-payment.svg?token=DkxazY7pbviHZyy38ZZb&branch=master)](https://travis-ci.com/montagestudio/montage-payment)
 
 This is a sample app that use Montage and Braintree to fetch provide a payment service.
 
@@ -21,15 +21,29 @@ npm start
 3. Test
 Then Open you browser to "https://localhost:8080".
 
+# BrainTree config
 
-## CustomFields
+## New config
 
-CustomFields:
-- planId
-- productId
-- productQty
-- productQtyUsed
-- 
+### Create accounts
+
+1. Create a Paypal account (https://www.paypal.com/signup/create)
+2. Create BrainTree account (https://www.braintreepayments.com/sandbox)
+3. Use Paypal to login after BrainTree email confirmation.
+4. Visit https://sandbox.braintreegateway.com
+5. Look for Sandbox Keys & Configuration" and save following value for later: "Merchant ID", "Public Key, and "Private Key".
+6. Use BRAINTREE_MARCHANT_ID to start montage-payment-service.
+
+### Setup CustomFields
+
+You will need to configure following CustomFields:
+- plan_id: planId
+- product_id productId
+- product_qty productQty
+- product_qty_used productQtyUsed
+
+See: https://articles.braintreepayments.com/control-panel/custom-fields#creating-a-custom-field
+
 ## Links
 - https://sandbox.braintreegateway.com/
 - https://articles.braintreepayments.com/control-panel/custom-fields#creating-a-custom-field

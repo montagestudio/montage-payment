@@ -27,7 +27,7 @@ app.set('APP_PORT', process.env.APP_PORT || 8080);
 app.set('APP_HOST', process.env.APP_HOST || 'localhost');
 app.set('APP_URL', process.env.APP_URL || (app.get('APP_SSL') ? 'https' : 'http') + '://' + app.get('APP_HOST') + ':' + app.get('APP_PORT'));
 
-app.set('BRAINTREE_MARCHANT_ID', process.env.BRAINTREE_MARCHANT_ID || "");
+app.set('BRAINTREE_MARCHANT_ID', process.env.BRAINTREE_MARCHANT_ID || "2vcbbfdttx7cyjxt");
 
 var config = require('./config/all');
 // TODO extend with env
