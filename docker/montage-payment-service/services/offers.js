@@ -287,7 +287,7 @@ function getSubscriptionInfo(subscription) {
        [ { amount: '29.90',
            currentBillingCycle: 1,
            id: 'WIDGET',
-           name: 'Sylaps Widget',
+           name: 'Widget',
            neverExpires: false,
            numberOfBillingCycles: 1,
            quantity: 1 } ],

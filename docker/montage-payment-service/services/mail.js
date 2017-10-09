@@ -130,7 +130,7 @@ exports.send = function (emailObj, emailConfig) {
         emailObj.encoding = 'utf-8';
         emailObj.textEncoding = 'base64';
         emailObj.headers = {
-            'X-Sylaps-Date': Date.now() 
+            'X-Date': Date.now() 
         };
 
         if (typeof emailObj.html === 'string') {
