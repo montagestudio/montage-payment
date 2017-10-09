@@ -56,26 +56,29 @@ See: https://articles.braintreepayments.com/control-panel/custom-fields#creating
 (Work in progress)
 
 ### Offers
-GET "/api/offers" - getOffers
-GET "/api/offers/offer/:offerId" - getOffer
+
+- GET "/api/offers" - getOffers
+- GET "/api/offers/offer/:offerId" - getOffer
 
 ### Customer
-GET "/api/customer" - get Customer
-GET "/api/customer/:customerId" - get Customer Details
-GET "/api/customer/:customerId/orders" - get Customer Orders
-GET "/api/customer/:customerId/orders/order/:orderId" - get Customer Order
-DELETE "/api/customer/:customerId/orders/order/:orderId" - cancel Customer Order
-GET "/api/customer/:customerId/transactions" - get Customer Transactions
-GET "/api/customer/:customerId/subscriptions" - get Customer Subscriptions
-GET "/api/customer/:customerId/offers" - get Customer Offers
-GET "/api/customer/:customerId/offers/offer/:offerId" - get Customer Offer
-GET "/api/customer/:customerId/plans" - get Customer Plans
+
+- GET "/api/customer" - get Customer
+- GET "/api/customer/:customerId" - get Customer Details
+- GET "/api/customer/:customerId/orders" - get Customer Orders
+- GET "/api/customer/:customerId/orders/order/:orderId" - get Customer Order
+- DELETE "/api/customer/:customerId/orders/order/:orderId" - cancel Customer Order
+- GET "/api/customer/:customerId/transactions" - get Customer Transactions
+- GET "/api/customer/:customerId/subscriptions" - get Customer Subscriptions
+- GET "/api/customer/:customerId/offers" - get Customer Offers
+- GET "/api/customer/:customerId/offers/offer/:offerId" - get Customer Offer
+- GET "/api/customer/:customerId/plans" - get Customer Plans
 
 ### Payment
-POST "/api/payment" - checkout Payment Offer
-PUT "/api/payment/:orderId" - update Payment Offer
-POST "/api/payment/callback" - payment callback 
-GET "/api/payment/callbackTest" - payment callbackTest
+
+- POST "/api/payment" - checkout Payment Offer
+- PUT "/api/payment/:orderId" - update Payment Offer
+- POST "/api/payment/callback" - payment callback 
+- GET "/api/payment/callbackTest" - payment callbackTest
 
 # Project Directory
 
