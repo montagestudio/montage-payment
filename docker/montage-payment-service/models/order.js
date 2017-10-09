@@ -1,4 +1,4 @@
-/*global require */
+/*global require, exports */
 'use strict';
 
 var mongoose = require('mongoose');
@@ -225,3 +225,5 @@ OrderSchema.pre('save', function (next) {
  * Define model.
  */
 mongoose.model('Order', OrderSchema);
+
+exports.OrderSchema = OrderSchema;

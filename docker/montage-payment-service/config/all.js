@@ -1,16 +1,5 @@
 /* global module, __dirname, require, process */
-
-var path = require('path'),
-    rootPath = path.normalize(__dirname + '/..');
-
 module.exports = {
-
-
-    // App info
-    app: {
-        url: process.env.APP_URL || "https://locahost",
-        name: process.env.APP_NAME || 'Montage Payment',
-    },
 
     //
     // Payment

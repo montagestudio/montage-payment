@@ -8,9 +8,7 @@
 var braintree = require('braintree');
 var q = require('q');
 
-var mongoose = require('mongoose');
-var Order = mongoose.model('Order');
-
+var Order = require('./../models/order');
 
 function isValidEmail(str) {
     return new Valid().validate(str).required().isEmail().isValid();
@@ -1359,7 +1357,7 @@ function sendTransactionReceiptEmail(order, customer, transaction, config) {
         },
         emailObj = {
             // Comma separated list of recipients
-            to: formatEmailName(customer.email customer.name),
+            to: formatEmailName(customer.email, customer.name),
             // ReplyTo info
             replyTo: formatEmailName(emailConfig.billing, appConfig.title),   
             // Sender info
@@ -1384,7 +1382,7 @@ function sendPurchaseEmail(order, customer, transaction, config) {
         },
         emailObj = {
             // Comma separated list of recipients
-            to: formatEmailName(customer.email customer.name),
+            to: formatEmailName(customer.email, customer.name),
             // ReplyTo info
             replyTo: formatEmailName(emailConfig.billing, appConfig.title),   
             // Sender info
@@ -1409,7 +1407,7 @@ function sendSubscriptionEmail(order, customer, subscription, config) {
         },
         emailObj = {
             // Comma separated list of recipients
-            to: formatEmailName(customer.email customer.name),  
+            to: formatEmailName(customer.email, customer.name),  
             // ReplyTo info
             replyTo: formatEmailName(emailConfig.billing, appConfig.title),   
             // Sender info
