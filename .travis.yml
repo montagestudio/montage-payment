@@ -23,6 +23,7 @@ install:
   - sudo pip install docker-compose
   - docker-compose version
   # NodeJS Install
+  - npm config set loglevel warn
   - "npm install"
   # Add self-signed cert to System in case build need it
   - sudo cp docker/montage-payment-service/certs/public.crt /usr/local/share/ca-certificates/public.crt
