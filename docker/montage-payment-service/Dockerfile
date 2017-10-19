@@ -16,10 +16,10 @@ ADD certs/private.key certs/private.key
 ADD certs/public.crt certs/public.crt
 
 # Then add source after install
-ADD config
-ADD models
-ADD controllers
-ADD resources
+ADD config ./
+ADD models ./
+ADD controllers ./
+ADD resources ./
 ADD index.js index.js
 
 EXPOSE 8080
