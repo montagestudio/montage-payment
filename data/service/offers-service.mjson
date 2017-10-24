@@ -1,0 +1,17 @@
+{
+    "root": {
+        "prototype": "logic/service/offers-service",
+        "values": {
+            "name": "OffersService",
+            "exportName": "OffersService",
+            "mappings": [],
+            "types": [
+                {"@": "offer"}
+            ]
+        }
+    },
+
+    "offer": {
+        "object": "data/model/offer.mjson"
+    }
+}

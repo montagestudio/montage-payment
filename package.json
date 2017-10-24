@@ -6,8 +6,7 @@
     "author": "Montage Studio, inc. (http://montagestudio.com/)",
     "private": true,
     "dependencies": {
-        "montage": "~0.15.0",
-        "digit": "~0.5.0"
+        "montage": "montagejs/montage#master"
     },
     "scripts": {
         "lint": "jshint .",

@@ -1,0 +1,26 @@
+{
+    "root": {
+        "prototype": "montage/core/meta/module-object-descriptor",
+        "values": {
+            "name": "Offer",
+            "propertyDescriptors": [
+                {"@": "id"}
+            ],
+            "objectDescriptorModule": {
+                "%": "data/model/offer.mjson"
+            },
+            "exportName": "Offer",
+            "module": {
+                "%": "logic/model/offer"
+            }
+        }
+    },
+
+    "id": {
+        "prototype": "montage/core/meta/property-descriptor",
+        "values": {
+            "name": "id",
+            "valueType": "string"
+        }
+    }
+}

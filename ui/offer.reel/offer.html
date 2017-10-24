@@ -6,8 +6,15 @@
     <script type="text/montage-serialization">
     {
         "owner": {
-            "properties": {
+            "values": {
                 "element": {"#": "owner"}
+            }
+        },
+        "offerId": {
+            "prototype": "montage/ui/text.reel",
+            "values": {
+                "element": {"#": "offerId"},
+                "value": {"<-": "@owner.value.id"}
             }
         }
     }
@@ -15,6 +22,7 @@
 </head>
 <body>
     <div data-montage-id="owner" class="Offer">
+        <span data-montage-id="offerId"></span>
     </div>
 </body>
 </html>
