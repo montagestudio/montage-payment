@@ -6,7 +6,8 @@ var Component = require("montage/ui/component").Component,
     DataQuery = require("montage/data/model/data-query").DataQuery,
     DataService = require("montage/data/service/data-service").DataService,
     Deserializer = require("montage/core/serialization/deserializer/montage-deserializer").MontageDeserializer,
-    Offer = require("logic/model/offer").Offer;
+    Offer = require("logic/model/offer").Offer,
+    MontageDataDescriptor = require("data/montage-data.mjson");
 
 /**
  * @class OffersList
@@ -15,11 +16,13 @@ var Component = require("montage/ui/component").Component,
 exports.OffersList = Component.specialize(/** @lends OffersList# */ {
     constructor: {
         value: function OffersList() {
-            this.super();
-            DataService.authorizationManager.delegate = this;
             var self = this;
-            this._initializeServices().then(function () {
-                return self._initializeOffers();
+            self.super();
+            DataService.authorizationManager.delegate = self;
+            self._initializeServices().then(function () {
+                self._initializeOffers();
+                self._initializeOfferById('pro');
+                self._createOfferById('test');
             });
         }
     },
@@ -27,10 +30,8 @@ exports.OffersList = Component.specialize(/** @lends OffersList# */ {
     _initializeServices: {
         value: function () {
             var self = this;
-            return require.async("data/montage-data.mjson").then(function (descriptor) {
-                var deserializer = new Deserializer().init(JSON.stringify(descriptor), require);
-                return deserializer.deserializeObject();
-            }).then(function (service) {
+            var deserializer = new Deserializer().init(MontageDataDescriptor, require);
+            return deserializer.deserializeObject().then(function (service) {
                 self.application.service = service;
                 self.isReady = true;
                 return service;
@@ -47,4 +48,31 @@ exports.OffersList = Component.specialize(/** @lends OffersList# */ {
             });
         }
     },
+
+    _initializeOfferById: {
+        value: function (id) {
+            var self = this,
+                criteria = new Criteria().initWithExpression("id == $.id", { id: id }),
+                query = DataQuery.withTypeAndCriteria(Offer, criteria);
+            return this.application.service.fetchData(query).then(function (offer) {
+                self.offer = offer;
+                return null;
+            });
+        }
+    },
+
+    _createOfferById: {
+        value: function (id) {
+
+            var self = this;
+
+            var offer = this.application.service.createDataObject(Offer);
+            offer.id = id;
+
+            return this.application.service.saveDataObject(offer).then(function (offer) {
+                self.offer = offer;
+                return null;
+            });
+        }
+    }
 });
