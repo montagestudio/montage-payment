@@ -1,0 +1,16 @@
+{
+    "root": {
+        "prototype": "montage/data/service/data-service",
+        "values": {
+            "name": "DataService",
+            "childServices": [
+                {"@": "offersService"}
+            ]
+        }
+    },
+
+    "offersService": {
+        "object": "data/service/offers-service.mjson"
+    }
+}
+

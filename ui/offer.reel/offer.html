@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="offer.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "values": {
+                "element": {"#": "owner"}
+            }
+        },
+        "offerId": {
+            "prototype": "montage/ui/text.reel",
+            "values": {
+                "element": {"#": "offerId"},
+                "value": {"<-": "@owner.value.id"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Offer">
+        <span data-montage-id="offerId"></span>
+    </div>
+</body>
+</html>

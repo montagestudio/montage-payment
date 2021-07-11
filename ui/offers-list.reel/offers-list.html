@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="offers-list.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "values": {
+                "element": {"#": "owner"}
+            }
+        },
+        "offers": {
+            "prototype": "montage/ui/repetition.reel",
+            "values": {
+                "element": { "#": "offers" },
+                "content": { "<-": "@owner.offers"}
+            }
+        },
+        "offer": {
+            "prototype": "ui/offer.reel",
+            "values": {
+                "element": { "#": "offer" },
+                "value": { "<-": "@offers:iteration.object" }
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="OffersList">
+        <div data-montage-id="offers" class="offers-results">
+            <div data-montage-id="offer"></div>    
+        </div>
+    </div>
+</body>
+</html>
